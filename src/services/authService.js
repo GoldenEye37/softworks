@@ -3,9 +3,13 @@ import axios from 'axios';
 
 
 const signup = async (e) => {
+
+    const API_BASE_URL = 'https://app.signalgas.io/api/v1/customer';
+
     e.preventDefault();
+
     try {
-        const response = await axios.post('https://app.signalgas.io/api/v1/customer/signup', formData, {
+        const response = await axios.post(API_BASE_URL, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -1,11 +1,10 @@
+import SignupForm from "./components/auth/SignupForm";
 
 function App() {
   return (
-    <div>
-      <header >
-        <p>Hello Leon!</p>
-      </header>
-    </div>
+      <main>
+          <SignupForm/>
+      </main>
   );
 }
 
