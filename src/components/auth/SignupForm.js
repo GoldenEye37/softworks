@@ -4,7 +4,7 @@ import {set} from "lodash";
 
 const SignupForm = () => {
 
-    // use useEffect to control form data changes
+    // use useState to store data
     const [formData, setFormData] = useState(
         {
             "fname": "",
@@ -76,4 +76,6 @@ const SignupForm = () => {
         </form>
     )
 
-}
+};
+
+export default SignupForm;
