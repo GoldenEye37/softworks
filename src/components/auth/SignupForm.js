@@ -7,9 +7,9 @@ import {faCheck, faInfo, faInfoCircle, faTimes} from "@fortawesome/free-solid-sv
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // regex for validating our data
-const FIRSTNAME_REGEX = /^[A-Za-z]{1,20}$/;
-const LASTNAME_REGEX = /^[A-Za-z]{1,20}$/;
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,32}$/;
+const FIRSTNAME_REGEX = /^[A-Za-z]{4,20}$/;
+const LASTNAME_REGEX = /^[A-Za-z]{4,20}$/;
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const COUNTRY_ID_REGEX =  /^\d+$/;
 const PHONE_REGEX = /^\d{10}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,7 +35,6 @@ const SignupForm = () => {
     const countryIdRef  = useRef();
     const phoneRef  = useRef();
     const emailRef  = useRef();
-
     const errRef = useRef();
 
     // firstName
@@ -77,69 +76,49 @@ const SignupForm = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    // todo
     // set focus when component loads using userRef
     useEffect(() => {
-        useRef.current.focus()
+        nameRef.current.focus()
     }, []);
 
     // useEffect to validate fields
 
     // validate firstName
     useEffect(() => {
-        const result = FIRSTNAME_REGEX.test(firstName);
-        console.log(result);
-        console.log(firstName);
-        setValidFirstName(result);
+        setValidFirstName(FIRSTNAME_REGEX.test(firstName));
     }, [firstName]);
 
     // validate lastName
     useEffect(() => {
-        const result = LASTNAME_REGEX.test(lastName);
-        console.log(result);
-        console.log(lastName);
-        setValidLastName(result);
+        setValidLastName(LASTNAME_REGEX.test(lastName));
     }, [lastName]);
 
     // Country ID
     useEffect(() => {
-        const result = COUNTRY_ID_REGEX.test(countryId);
-        console.log(result);
-        console.log(countryId);
-        setValidCountryId(result);
+        setValidCountryId( COUNTRY_ID_REGEX.test(countryId));
     }, [countryId]);
 
     // Phone Number
     useEffect(() => {
-        const result = PHONE_REGEX.test(phoneNumber);
-        console.log(result);
-        console.log(phoneNumber);
-        setValidPhoneNumber(result);
+        setValidPhoneNumber(PHONE_REGEX.test(phoneNumber));
     }, [phoneNumber]);
 
     // Email Address
     useEffect(() => {
-        const result = EMAIL_REGEX.test(emailAddress);
-        console.log(result);
-        console.log(emailAddress);
-        setValidEmailAddress(result);
+        setValidEmailAddress(EMAIL_REGEX.test(emailAddress));
     }, [emailAddress]);
 
     // validate Password and check for match
     useEffect(() => {
-        const result = PASSWORD_REGEX.test(password);
-        console.log(result);
-        console.log(password);
-        setValidPassword(result);
-        const match = password === matchPassword;
-        setValidPasswordMatch(match)
+        setValidPassword(PASSWORD_REGEX.test(password));
+        setValidPasswordMatch(password === matchPassword);
     }, [password, matchPassword]);
 
     // handle error
     useEffect(() => {
         setErrMsg('');
-    }, [firstName, lastName, matchPassword]);
-
-    // handle change
+    }, [firstName, lastName, countryId, emailAddress, phoneNumber, matchPassword]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -160,7 +139,7 @@ const SignupForm = () => {
                 <label
                     htmlFor="firstName"
                 >
-                    First Name:
+                    First Name():
                     <span
                         className={validFirstName ? "valid" : "hide"}
                     >
@@ -174,23 +153,23 @@ const SignupForm = () => {
                 </label>
                 <input
                     type="text"
-                    name="firstName"
+                    id="username"
                     ref={nameRef}
                     autoComplete="off"
-                    // onChange={handleChange} // todo
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
                     required
                     aria-invalid={validFirstName ? "false" : "true"}
                     aria-describedby="uidnote"
                     onFocus={() => setFirstNameFocus(true)}
                     onBlur={() => setFirstNameFocus(false)}
-                    placeholder="example: John"
                 />
-                <p
-                    id="uidnote"
-                    className={firstNameFocus && firstName && !validFirstName ? "instructions" : "offscreen"}
-                >
+                <p id="uidnote"
+                   className={firstNameFocus && firstName && !validFirstName ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle}/>
-                    First Name must have 4 to 24 characters.
+                    4 to 24 characters.<br/>
+                    Must begin with a letter.<br/>
+                    Letters, numbers, underscores, hyphens allowed.
                 </p>
 
 
@@ -215,7 +194,7 @@ const SignupForm = () => {
                     name="lastName"
                     ref={lastNameRef}
                     autoComplete="off"
-                    // onChange={handleChange} // todo
+                    onChange={(e) => setLastName(e.target.value)}
                     required
                     aria-invalid={validFirstName ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -252,7 +231,7 @@ const SignupForm = () => {
                     type="text"
                     name="countryId"
                     // ref={lastNameRef}
-                    // onChange={handleChange} // todo
+                    onChange={(e) => setcountryId(e.target.value)}
                     required
                     aria-invalid={validCountryId ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -281,7 +260,7 @@ const SignupForm = () => {
                     type="text"
                     name="phoneNumber"
                     // ref={lastNameRef}
-                    // onChange={handleChange} // todo
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     required
                     aria-invalid={validPhoneNumber ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -290,9 +269,9 @@ const SignupForm = () => {
                 />
 
 
-                {/**********************Email Address*******************/}
+                {/**********************Email Address *******************/}
                 <label
-                    htmlFor="country_id"
+                    htmlFor="emailAddress"
                 >
                     Email Address:
                     <span
@@ -307,29 +286,22 @@ const SignupForm = () => {
                     </span>
                 </label>
                 <input
-                    type="email"
+                    type="text"
                     name="emailAddress"
                     // ref={lastNameRef}
-                    // onChange={handleChange} // todo
+                    onChange={(e) => setEmailAddress(e.target.value)}
                     required
-                    aria-invalid={validPhoneNumber ? "false" : "true"}
+                    aria-invalid={validEmailAddress ? "false" : "true"}
                     aria-describedby="uidnote"
-                    onFocus={() => setPhoneNumberFocus(true)}
-                    onBlur={() => setPhoneNumberFocus(false)}
+                    onFocus={() => setEmailAddressFocus(true)}
+                    onBlur={() => setEmailAddressFocus(false)}
                 />
 
                 {/**********************Password*******************/}
-                <label
-                    htmlFor="password"
-                >
+                <label htmlFor="password">
                     Password:
-                    <FontAwesomeIcon
-                        icon={faCheck}
-                        className={validPassword ? "valid" : "hide"}
-                    />
-                    <FontAwesomeIcon
-                        icon={faTimes}
-                        className={validPassword || !password ? "hide" : "invalid"}/>
+                    <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"}/>
+                    <FontAwesomeIcon icon={faTimes} className={validPassword || !password ? "hide" : "invalid"}/>
                 </label>
                 <input
                     type="password"
@@ -338,14 +310,11 @@ const SignupForm = () => {
                     value={password}
                     required
                     aria-invalid={validPassword ? "false" : "true"}
-                    aria-describedby="passwordnote"
+                    aria-describedby="pwdnote"
                     onFocus={() => setpasswordFocus(true)}
                     onBlur={() => setpasswordFocus(false)}
                 />
-                <p
-                    id="passwordnote"
-                    className={passwordFocus && !validPassword ? "instructions" : "offscreen"}
-                >
+                <p id="pwdnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle}/>
                     8 to 24 characters.<br/>
                     Must include uppercase and lowercase letters, a number and a special character.<br/>
@@ -356,16 +325,15 @@ const SignupForm = () => {
 
                 {/**********************Confirm Password*******************/}
 
-                <label htmlFor="confirm_password">
+                <label htmlFor="confirm_pwd">
                     Confirm Password:
                     <FontAwesomeIcon icon={faCheck} className={validPasswordMatch && matchPassword ? "valid" : "hide"}/>
-                    <FontAwesomeIcon icon={faTimes}
-                                     className={validPasswordMatch || !matchPassword ? "hide" : "invalid"}/>
+                    <FontAwesomeIcon icon={faTimes} className={validPasswordMatch || !matchPassword ? "hide" : "invalid"}/>
                 </label>
                 <input
                     type="password"
-                    id="confirm_password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    id="confirm_pwd"
+                    onChange={(e) => setMatchPassword(e.target.value)}
                     value={matchPassword}
                     required
                     aria-invalid={validPasswordMatch ? "false" : "true"}
@@ -373,8 +341,7 @@ const SignupForm = () => {
                     onFocus={() => setMatchPasswordFocus(true)}
                     onBlur={() => setMatchPasswordFocus(false)}
                 />
-                <p id="confirmnote"
-                   className={matchPasswordFocus && !validPasswordMatch ? "instructions" : "offscreen"}>
+                <p id="confirmnote" className={matchPasswordFocus && !validPasswordMatch ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle}/>
                     Must match the first password input field.
                 </p>
