@@ -15,6 +15,21 @@ const PHONE_REGEX = /^\d{10}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const SignupForm = () => {
+
+
+    /*
+
+    *************** data ***************
+        {
+            fname
+            lname
+            country_id
+            phone
+            email
+            password
+        }
+    * */
+
     const nameRef = useRef();
     const lastNameRef = useRef();
     const countryIdRef  = useRef();
@@ -22,18 +37,6 @@ const SignupForm = () => {
     const emailRef  = useRef();
 
     const errRef = useRef();
-
-    // use useState to store data
-    const [formData, setFormData] = useState(
-        {
-            "fname": "",
-            "lname":"",
-            "country_id":1,
-            "phone":"",
-            "email":"",
-            "password":""
-        }
-    );
 
     // firstName
     const [firstName, setFirstName] = useState('');
@@ -137,15 +140,11 @@ const SignupForm = () => {
     }, [firstName, lastName, matchPassword]);
 
     // handle change
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value});
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // call authService singup and pass data
-        signup(formData);
+        // signup();
     };
 
     return (
@@ -178,7 +177,7 @@ const SignupForm = () => {
                     name="firstName"
                     ref={nameRef}
                     autoComplete="off"
-                    onChange={handleChange} // todo
+                    // onChange={handleChange} // todo
                     required
                     aria-invalid={validFirstName ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -216,7 +215,7 @@ const SignupForm = () => {
                     name="lastName"
                     ref={lastNameRef}
                     autoComplete="off"
-                    onChange={handleChange} // todo
+                    // onChange={handleChange} // todo
                     required
                     aria-invalid={validFirstName ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -253,7 +252,7 @@ const SignupForm = () => {
                     type="text"
                     name="countryId"
                     // ref={lastNameRef}
-                    onChange={handleChange} // todo
+                    // onChange={handleChange} // todo
                     required
                     aria-invalid={validCountryId ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -282,7 +281,7 @@ const SignupForm = () => {
                     type="text"
                     name="phoneNumber"
                     // ref={lastNameRef}
-                    onChange={handleChange} // todo
+                    // onChange={handleChange} // todo
                     required
                     aria-invalid={validPhoneNumber ? "false" : "true"}
                     aria-describedby="uidnote"
@@ -311,7 +310,7 @@ const SignupForm = () => {
                     type="email"
                     name="emailAddress"
                     // ref={lastNameRef}
-                    onChange={handleChange} // todo
+                    // onChange={handleChange} // todo
                     required
                     aria-invalid={validPhoneNumber ? "false" : "true"}
                     aria-describedby="uidnote"
