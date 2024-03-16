@@ -92,6 +92,30 @@ const SignupForm = () => {
         setValidLastName(result);
     }, [lastName]);
 
+    // Country ID
+    useEffect(() => {
+        const result = COUNTRY_ID_REGEX.test(countryId);
+        console.log(result);
+        console.log(countryId);
+        setValidCountryId(result);
+    }, [countryId]);
+
+    // Phone Number
+    useEffect(() => {
+        const result = PHONE_REGEX.test(phoneNumber);
+        console.log(result);
+        console.log(phoneNumber);
+        setValidPhoneNumber(result);
+    }, [phoneNumber]);
+
+    // Email Address
+    useEffect(() => {
+        const result = EMAIL_REGEX.test(emailAddress);
+        console.log(result);
+        console.log(emailAddress);
+        setValidEmailAddress(result);
+    }, [emailAddress]);
+
     // validate Password and check for match
     useEffect(() => {
         const result = PASSWORD_REGEX.test(password);
