@@ -5,6 +5,7 @@ import {set} from "lodash";
 // font awesome icons
 import {faCheck, faInfo, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 // regex for validating our data
 const FIRSTNAME_REGEX = /^[A-Za-z]{4,20}$/;
@@ -14,6 +15,7 @@ const COUNTRY_ID_REGEX =  /^\d+$/;
 const PHONE_REGEX = /^\d{10}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const REGISTER_URL = ''
 const SignupForm = () => {
 
 
@@ -120,10 +122,52 @@ const SignupForm = () => {
         setErrMsg('');
     }, [firstName, lastName, countryId, emailAddress, phoneNumber, matchPassword]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // call authService singup and pass data
-        // signup();
+        // if button enabled with JS hack
+        const v1 = FIRSTNAME_REGEX.test(firstName);
+        const v2 = PASSWORD_REGEX.test(password);
+        if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+        try {
+            // turn to postman variable
+            const fname = firstName;
+            const lname = lastName;
+            const country_id = countryId;
+            const phone = phoneNumber;
+            const email = emailAddress;
+            const password = password;
+
+
+            const response = await axios.post(REGISTER_URL,
+                JSON.stringify({fname,lname,country_id,phone,email, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(response?.data);
+            console.log(response?.accessToken);
+            console.log(JSON.stringify(response))
+            setSuccess(true);
+            //clear state and controlled inputs
+            //need value attrib on inputs for this
+            // todo
+            setFirstName('');
+            setPassword('');
+            setMatchPassword('');
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
     };
 
     return (
