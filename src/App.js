@@ -3,7 +3,7 @@ import './App.css'
 
 function App() {
   return (
-      <main>
+      <main className="flex items-center justify-center h-screen m-6">
           <SignupForm/>
       </main>
   );

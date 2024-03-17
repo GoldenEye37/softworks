@@ -7,14 +7,14 @@
 }
 
 html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     color: #fff;
 }
 
 body {
     min-height: 100vh;
-    background-color: dodgerblue;
+    background-color: #ffffff;
 }
 
 .App {
@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 100vh;
   padding: 1rem 0.5rem;
 }
 
@@ -33,8 +33,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1rem;
-    background-color: rgba(0,0,0,0.4);
+    padding: 1rem;;
 }
 
 form {

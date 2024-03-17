@@ -9,12 +9,7 @@ const signup = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await axios.post(API_BASE_URL, formData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        console.log('Signup successful!', response.data);
+        console.log('Signup successful!');
     }catch (error) {
         console.error("SignUp failed, please try again.", error)
     }
