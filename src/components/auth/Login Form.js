@@ -46,7 +46,8 @@ const Login = () => {
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.token;
             var customer = response?.data?.customer;
-            setAuth({ email, password, customer, accessToken });
+            const authorized = true;
+            setAuth({ email, password, customer, accessToken, authorized });
             setEmail('');
             setPassword('');
             setSuccess(true);

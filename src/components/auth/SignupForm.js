@@ -5,8 +5,7 @@ import {set} from "lodash";
 // font awesome icons
 import {faCheck, faInfo, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-// import axios from "../api/axios";
-import axios from "axios";
+import axios from "../api/axios";
 // regex for validating our data
 const FIRSTNAME_REGEX = /^[A-Za-z]{4,20}$/;
 const LASTNAME_REGEX = /^[A-Za-z]{4,20}$/;
@@ -15,7 +14,7 @@ const COUNTRY_ID_REGEX =  /^\d+$/;
 const PHONE_REGEX = /^\d{10}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const REGISTER_URL = '/customer/signup'
+const SIGNUP_URL = '/customer/signup'
 const SignupForm = () => {
     /*
 
@@ -138,22 +137,19 @@ const SignupForm = () => {
             console.log("handling try");
 
             console.log("handling post");
-            const response = await axios.post('https://app.signalgas.io/api/v1/customer/signup',
+            const response = await axios.post(SIGNUP_URL,
                 {
-                    fname:"John",
-                    lname:"SmithE",
-                    country_id:8,
-                    phone:"0777777777",
-                    email:"john123@gmail.com",
-                    password:"John123$"
+                    fname:firstName,
+                    lname:lastName,
+                    country_id:countryId,
+                    phone:phoneNumber,
+                    email:emailAddress,
+                    password:password
                 },
 
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': 'http://localhost:3000/',
-                        'Access-Control-Allow-Headers': '*',
-                        'Access-Control-Allow-Methods': 'POST,GET,DELETE,PUT,OPTIONS'
                     },
                      withCredentials: true
                 }
