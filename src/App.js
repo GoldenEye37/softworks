@@ -5,6 +5,7 @@ import {Routes, Route} from "react-router-dom";
 import Layout from "./pages/Layout";
 import Login from "./components/auth/Login Form";
 import Unauthorized from "./pages/Unauthorized";
+import RequireAuth from "./pages/RequireAuth";
 
 function App() {
   return (
@@ -16,13 +17,15 @@ function App() {
               <Route path="signup" element={<SignupForm />} />
               <Route path="unauthorized" element={<Unauthorized />} />
 
+              {/*todo*/}
               {/*authenticated            */}
-              <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-                  <Route path="/" element={<Home />} />
-              </Route>
+              {/*<Route element={<RequireAuth authenticated= {true} />}>*/}
+              {/*    <Route path="/" element={<Products />} />*/}
+              {/*    <Route path="/" element={<Currencies />} />*/}
+              {/*</Route>*/}
 
               {/*wild card*/}
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<Unauthorized />} />
           </Route>
       </Routes>
 
