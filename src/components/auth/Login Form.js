@@ -1,21 +1,27 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-// import AuthContext from "./context/AuthProvider"; // todo
+import AuthContext from "./context/AuthProvider"; // todo
 
-import axios from "axios";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
-// import axios from './api/axios'; // todo
-const LOGIN_URL = '/auth'; // todo
+import {useLocation, useNavigate} from "react-router-dom";
+import axios from './api/axios';
+const LOGIN_URL = '/customer/signin'; // todo
 
 const Login = () => {
-    // const { setAuth } = useContext(AuthContext);
+    // navigation
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    // initialize auth context
+    const { setAuth } = useContext(AuthContext);
+
     const emailRef = useRef();
     const errRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
         emailRef.current.focus();
@@ -38,13 +44,14 @@ const Login = () => {
             );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            // setAuth({ user, pwd, roles, accessToken }); todo
+            const accessToken = response?.data?.token;
+            var customer = response?.data?.customer;
+            setAuth({ email, password, customer, accessToken });
             setEmail('');
             setPassword('');
             setSuccess(true);
         } catch (err) {
+            // todo
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 400) {
@@ -60,15 +67,7 @@ const Login = () => {
 
     return (
         <>
-            {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <a href="#">Go to Home</a>
-                    </p>
-                </section>
-            ) : (
+            (
                 <section
                     className="flex m-6 p-12 h-fullflex-col max-w-md rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100"
                 >
@@ -119,7 +118,7 @@ const Login = () => {
                         </p>
                     </div>
                 </section>
-            )}
+            )
         </>
     )
 }
