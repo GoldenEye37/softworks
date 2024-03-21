@@ -2,14 +2,12 @@ import React, { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "../../context/AuthProvider";
 
 import {Link, useLocation, useNavigate} from "react-router-dom";
-// import axios from "../api/axios";
 import axios from "axios";
 
-const LOGIN_URL = '/customer/signin';
+const LOGIN_URL = 'https://app.signalgas.io/api/v1/customer/signin';
 
 const Login = () => {
     // navigation
-
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -41,15 +39,14 @@ const Login = () => {
                 JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+                    withCredentials: true,
                 }
             );
             console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
             const accessToken = response?.data?.token;
             var customer = response?.data?.customer;
             const authorized = true;
-            console.log("tapinda")
+            console.log("tapinda");
             setAuth({ email, password, customer, accessToken, authorized });
             setEmail('');
             setPassword('');
@@ -58,8 +55,6 @@ const Login = () => {
             // todo
             if (!err?.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
             } else {
@@ -112,7 +107,7 @@ const Login = () => {
                         <div className="space-y-2 my-0 mx-4">
                             <div>
                                 <button type="submit"
-                                        onSubmit={handleLogin}
+                                        onSubmit={console.log("chabaya")}
                                         className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Login
                                 </button>
                             </div>

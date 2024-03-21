@@ -5,7 +5,7 @@ import {set} from "lodash";
 // font awesome icons
 import {faCheck, faInfo, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import {Link} from "react-router-dom";
 
 
@@ -17,7 +17,7 @@ const COUNTRY_ID_REGEX =  /^\d+$/;
 const PHONE_REGEX = /^\d{10}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const SIGNUP_URL = '/customer/signup'
+const SIGNUP_URL = 'https://app.signalgas.io/api/v1/customer/signup'
 const SignupForm = () => {
     /*
 
@@ -123,23 +123,9 @@ const SignupForm = () => {
     }, [firstName, lastName, countryId, emailAddress, phoneNumber, matchPassword]);
 
     const handleSubmit = async (e) => {
-        console.log("handling breaking");
-        console.log("handling submit");
         e.preventDefault();
-        // if button enabled with JS hack
-        console.log("handling check");
-
-        // const v1 = FIRSTNAME_REGEX.test(firstName);
-        // const v2 = PASSWORD_REGEX.test(password);
-        // if (!v1 || !v2) {
-        //     setErrMsg("Invalid Entry");
-        //     return;
-        // };
-        console.log("handling if");
         try {
-            console.log("handling try");
-
-            console.log("handling post");
+            console.log("url" + SIGNUP_URL)
             const response = await axios.post(SIGNUP_URL,
                 {
                     fname:firstName,
@@ -149,7 +135,6 @@ const SignupForm = () => {
                     email:emailAddress,
                     password:password
                 },
-
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -159,9 +144,6 @@ const SignupForm = () => {
             );
             console.log(JSON.stringify(response.data.message));
             setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
-            // todo
             setFirstName('');
             setPassword('');
             setMatchPassword('');
