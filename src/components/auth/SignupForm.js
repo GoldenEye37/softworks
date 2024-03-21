@@ -174,10 +174,10 @@ const SignupForm = () => {
                 </section>
             ) : (
                 <section onSubmit={handleSubmit}
-                         className="flex m-6 p-12 h-fullflex-col max-w-md rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+                         className="flex m-6 p-12 min-w-fit flex-col max-w-md rounded-md sm:p-10 bg-gray-600 text-gray-100">
                     <div className=" my-0 mb-2 text-center">
                         <h1 className="my-3 text-2xl font-bold m-0 p-0">Sign Up </h1>
-                        <p className="text-sm dark:text-gray-400 m-0 p-0">to Get Started</p>
+                        <p className="text-sm text-gray-400 m-0 p-0">to Get Started</p>
                     </div>
                     <p
                         ref={errRef}
@@ -186,7 +186,7 @@ const SignupForm = () => {
                     >
                         {errMsg}
                     </p>
-                    <form noValidate="" action="" className="space-y-12 min-w-64">
+                    <form noValidate="" action="" className="space-y-12 min-w-full">
                         <div className="space-y-4 m-0 p-0 min-w-64">
                             <div className="flex flex-row ">
                                 {/********************** first Name *******************/}
@@ -205,7 +205,7 @@ const SignupForm = () => {
                                         </span>
                                     </label>
                                     <input type="text" name="firstName" id="firstName" placeholder="John"
-                                           className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                           className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                            autoComplete="off"
                                            onChange={(e) => setFirstName(e.target.value)}
                                            value={firstName}
@@ -240,7 +240,7 @@ const SignupForm = () => {
                                         </span>
                                     </label>
                                     <input type="text" name="lastName" id="lastName" placeholder="Smith"
-                                           className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                           className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                            ref={lastNameRef}
                                            autoComplete="off"
                                            onChange={(e) => setLastName(e.target.value)}
@@ -277,7 +277,7 @@ const SignupForm = () => {
                                         </span>
                                     </label>
                                     <input type="text" name="countryId" id="countryId" placeholder="0"
-                                           className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                           className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                            ref={countryIdRef}
                                            autoComplete="off"
                                            onChange={(e) => setcountryId(e.target.value)}
@@ -312,7 +312,7 @@ const SignupForm = () => {
                                         </span>
                                     </label>
                                     <input type="text" name="phoneNumber" id="phoneNumber" placeholder="0771234567"
-                                           className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                           className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                            ref={phoneRef}
                                            autoComplete="off"
                                            onChange={(e) => setPhoneNumber(e.target.value)}
@@ -349,7 +349,7 @@ const SignupForm = () => {
                                     </span>
                                 </label>
                                 <input type="text" name="emailAddress" id="emailAddress" placeholder="jsmith@gmail.com"
-                                       className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                       className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                        ref={emailRef}
                                        autoComplete="off"
                                        onChange={(e) => setEmailAddress(e.target.value)}
@@ -385,7 +385,7 @@ const SignupForm = () => {
                                         </span>
                                     </label>
                                     <input type="password" name="validPassword" id="validPassword" placeholder="**********"
-                                           className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                           className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                            autoComplete="off"
                                            onChange={(e) => setPassword(e.target.value)}
                                            value={password}
@@ -422,7 +422,7 @@ const SignupForm = () => {
                                         </span>
                                     </label>
                                     <input type="password" name="confirm_pwd" id="confirm_pwd" placeholder="**********"
-                                           className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                           className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                            autoComplete="off"
                                            onChange={(e) => setMatchPassword(e.target.value)}
                                             value={matchPassword}
@@ -443,12 +443,12 @@ const SignupForm = () => {
                         <div className="space-y-2 my-0 mx-4">
                             <div>
                                 <button type="submit"
-                                        className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Sign
+                                        className="w-full px-8 py-3 font-semibold rounded-md bg-amber-500 text-white">Sign
                                     up
                                 </button>
                             </div>
-                            <p className="px-6 text-sm text-center dark:text-gray-400">Don't have an account yet?
-                                <Link to="/login" rel="noopener noreferrer" href="#" className="hover:underline dark:text-violet-400">Sign
+                            <p className="px-6 text-sm text-center text-gray-400">Don't have an account yet?
+                                <Link to="/login" rel="noopener noreferrer" href="#" className="hover:underline text-violet-400">Sign
                                     in</Link>.
                             </p>
                         </div>

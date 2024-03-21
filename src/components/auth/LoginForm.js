@@ -67,11 +67,11 @@ const Login = () => {
         <>
             (
                 <section
-                    className="flex m-6 p-12 h-fullflex-col max-w-md rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100"
+                    className="flex m-6 p-12 h-fullflex-col max-w-md rounded-md sm:p-10 bg-gray-600 text-gray-100"
                 >
                     <div className=" my-0 mb-2 text-center">
                         <h1 className="my-3 text-2xl font-bold m-0 p-0">Log In </h1>
-                        <p className="text-sm dark:text-gray-400 m-0 p-0">to Get Started</p>
+                        <p className="text-sm text-gray-400 m-0 p-0">to Get Started</p>
                     </div>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <form noValidate="" action="" className="space-y-4 min-w-64" onSubmit={handleLogin}>
@@ -81,7 +81,7 @@ const Login = () => {
                                 Email Address:
                             </label>
                             <input type="text" name="emailAddress" id="emailAddress" placeholder="jsmith@gmail.com"
-                                   className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                   className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-gray-100"
                                    ref={emailRef}
                                    autoComplete="off"
                                    onChange={(e) => setEmail(e.target.value)}
@@ -96,7 +96,7 @@ const Login = () => {
                                 Password:
                             </label>
                             <input type="password" name="password" id="password" placeholder="**********"
-                                   className=" w-full px-16 py-16 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                                   className=" w-full px-16 py-16 border rounded-md border-gray-400 bg-gray-500 text-sm text-gray-100"
                                    autoComplete="off"
                                    onChange={(e) => setPassword(e.target.value)}
                                    value={password}
@@ -107,11 +107,11 @@ const Login = () => {
                             <div>
                                 <button type="submit"
                                         onSubmit={handleLogin}
-                                        className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Login
+                                        className="w-full px-8 py-3 font-semibold rounded-md bg-amber-500  text-white">Login
                                 </button>
                             </div>
-                            <p className="px-6 text-sm text-center dark:text-gray-400">Don't have an account yet?
-                                <Link to="/signup" rel="noopener noreferrer" href="#" className="hover:underline dark:text-violet-400">Sign
+                            <p className="px-6 text-sm text-center text-gray-400">Don't have an account yet?
+                                <Link to="/signup" rel="noopener noreferrer" href="#" className="hover:underline text-violet-400">Sign
                                     up</Link>.
                             </p>
                         </div>
