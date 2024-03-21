@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "./context/AuthProvider"; // todo
+import AuthContext from "../../context/AuthProvider";
 
-import {useLocation, useNavigate} from "react-router-dom";
-import axios from './api/axios';
-const LOGIN_URL = '/customer/signin'; // todo
+import {Link, useLocation, useNavigate} from "react-router-dom";
+// import axios from "../api/axios";
+import axios from "axios";
+
+const LOGIN_URL = '/customer/signin';
 
 const Login = () => {
     // navigation
@@ -47,6 +49,7 @@ const Login = () => {
             const accessToken = response?.data?.token;
             var customer = response?.data?.customer;
             const authorized = true;
+            console.log("tapinda")
             setAuth({ email, password, customer, accessToken, authorized });
             setEmail('');
             setPassword('');
@@ -106,18 +109,20 @@ const Login = () => {
                                    required
                             />
                         </div>
-                    </form>
-                    <div className="space-y-2 my-0 mx-4">
-                        <div>
-                            <button type="submit"
-                                    className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Login
-                            </button>
+                        <div className="space-y-2 my-0 mx-4">
+                            <div>
+                                <button type="submit"
+                                        onSubmit={handleLogin}
+                                        className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Login
+                                </button>
+                            </div>
+                            <p className="px-6 text-sm text-center dark:text-gray-400">Don't have an account yet?
+                                <Link to="/signup" rel="noopener noreferrer" href="#" className="hover:underline dark:text-violet-400">Sign
+                                    up</Link>.
+                            </p>
                         </div>
-                        <p className="px-6 text-sm text-center dark:text-gray-400">Don't have an account yet?
-                            <a rel="noopener noreferrer" href="#" className="hover:underline dark:text-violet-400">Sign
-                                up</a>.
-                        </p>
-                    </div>
+                    </form>
+
                 </section>
             )
         </>

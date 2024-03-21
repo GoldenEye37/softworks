@@ -6,6 +6,9 @@ import {set} from "lodash";
 import {faCheck, faInfo, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
+import {Link} from "react-router-dom";
+
+
 // regex for validating our data
 const FIRSTNAME_REGEX = /^[A-Za-z]{4,20}$/;
 const LASTNAME_REGEX = /^[A-Za-z]{4,20}$/;
@@ -463,8 +466,8 @@ const SignupForm = () => {
                                 </button>
                             </div>
                             <p className="px-6 text-sm text-center dark:text-gray-400">Don't have an account yet?
-                                <a rel="noopener noreferrer" href="#" className="hover:underline dark:text-violet-400">Sign
-                                    in</a>.
+                                <Link to="/login" rel="noopener noreferrer" href="#" className="hover:underline dark:text-violet-400">Sign
+                                    in</Link>.
                             </p>
                         </div>
 

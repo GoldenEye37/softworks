@@ -1,22 +1,17 @@
 import React from "react";
-import SignupForm from "../../components/auth/SignupForm";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate, useRouteError} from "react-router-dom";
 
-const Unauthorized = () => {
-    const navigate = useNavigate();
+export default function Unauthorized() {
+  const error = useRouteError();
+  console.error(error);
 
-    const goBack = () => navigate(-1);
-
-    return (
-        <section>
-            <h1>Unauthorized</h1>
-            <br />
-            <p>You do not have access to the requested page.</p>
-            <div className="flexGrow">
-                <button onClick={goBack}>Go Back</button>
-            </div>
-        </section>
-    )
-};
-
-export default Unauthorized;
+  return (
+    <div className="bg-amber-300 min-h-64" id="error-page">
+      <h1>Oops!</h1>
+      <p>Sorry, an unexpected error has occurred.</p>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
+    </div>
+  );
+}
