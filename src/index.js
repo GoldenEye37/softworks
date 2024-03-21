@@ -12,6 +12,8 @@ import Login from "./components/auth/LoginForm";
 import SignupForm from "./components/auth/SignupForm";
 import Dashboard from "./pages/Dashboard";
 import Products from "./pages/products/Products";
+import RequireAuth from "./pages/RequireAuth";
+import {AuthProvider} from "./context/AuthProvider";
 
 const router = createBrowserRouter([
     {
@@ -29,11 +31,11 @@ const router = createBrowserRouter([
         },
         {
         path: "home",
-        element: <Dashboard />,
+        element: <RequireAuth element={<Dashboard />} />,
         },
         {
             path: "products",
-            element: <Products />,
+            element: <RequireAuth element={<Products />} />,
         },
     ],
     },
@@ -41,7 +43,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
         <React.StrictMode>
-            <RouterProvider router={router}/>
+            <AuthProvider>
+              <RouterProvider router={router} />
+            </AuthProvider>
         </React.StrictMode>
 );
 

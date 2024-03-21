@@ -35,18 +35,17 @@ const Login = () => {
 
         try {
             // TODO skip auth for now
-            // const response = await axios.post(LOGIN_URL,
-            //     JSON.stringify({ email, password }),
-            //     {
-            //         headers: { 'Content-Type': 'application/json' },
-            //         withCredentials: true,
-            //     }
-            // );
-            // console.log(JSON.stringify(response?.data));
-            // const accessToken = response?.data?.token;
-            // var customer = response?.data?.customer;
-            // const authorized = true;
-            // setAuth({ email, password, customer, accessToken, authorized });
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({ email, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true,
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            const accessToken = response?.data?.token;
+            var customer = response?.data?.customer;
+            setAuth({ email, password, customer, accessToken, isAuthenticated: true });
             setEmail('');
             setPassword('');
             navigate(from, { replace: true });
