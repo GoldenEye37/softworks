@@ -10,7 +10,7 @@ const Login = () => {
     // navigation
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/home";
 
     // initialize auth context
     const { setAuth } = useContext(AuthContext);
@@ -20,7 +20,6 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [success, setSuccess] = useState(false);
     const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
@@ -35,22 +34,22 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ email, password }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true,
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.token;
-            var customer = response?.data?.customer;
-            const authorized = true;
-            console.log("tapinda");
-            setAuth({ email, password, customer, accessToken, authorized });
+            // TODO skip auth for now
+            // const response = await axios.post(LOGIN_URL,
+            //     JSON.stringify({ email, password }),
+            //     {
+            //         headers: { 'Content-Type': 'application/json' },
+            //         withCredentials: true,
+            //     }
+            // );
+            // console.log(JSON.stringify(response?.data));
+            // const accessToken = response?.data?.token;
+            // var customer = response?.data?.customer;
+            // const authorized = true;
+            // setAuth({ email, password, customer, accessToken, authorized });
             setEmail('');
             setPassword('');
-            setSuccess(true);
+            navigate(from, { replace: true });
         } catch (err) {
             // todo
             if (!err?.response) {
@@ -107,7 +106,7 @@ const Login = () => {
                         <div className="space-y-2 my-0 mx-4">
                             <div>
                                 <button type="submit"
-                                        onSubmit={console.log("chabaya")}
+                                        onSubmit={handleLogin}
                                         className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Login
                                 </button>
                             </div>

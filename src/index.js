@@ -10,6 +10,9 @@ import reportWebVitals from './reportWebVitals';
 import Unauthorized from "./pages/Unauthorized";
 import Login from "./components/auth/LoginForm";
 import SignupForm from "./components/auth/SignupForm";
+import Dashboard from "./pages/Dashboard";
+import Products from "./pages/products/Products";
+import Countries from "./pages/currencies/Countries";
 
 const router = createBrowserRouter([
     {
@@ -24,7 +27,19 @@ const router = createBrowserRouter([
         {
         path: "signup",
         element: <SignupForm />,
-      },
+        },
+        {
+        path: "home",
+        element: <Dashboard />,
+        },
+        {
+            path: "products",
+            element: <Products />,
+        },
+        {
+            path: "countries",
+            element: <Countries />,
+        },
     ],
     },
 ]);

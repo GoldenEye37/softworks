@@ -9,6 +9,7 @@ function App() {
       <main className="flex items-center justify-center h-screen m-6">
           <Routes>
               <Route path="/" element={<Navigate to="/login" />} />
+              {/*<Route path="/products" element={<Navigate to="/login" />} />*/}
           </Routes>
           <Outlet/>
       </main>
