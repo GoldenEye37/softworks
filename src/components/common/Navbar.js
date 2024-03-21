@@ -12,7 +12,6 @@ export default function Navbar (){
                     <ul className="items-stretch hidden space-x-3 lg:flex">
                         <CustomLink href="/home">Home</CustomLink>
                         <CustomLink href="/products">Products</CustomLink>
-                        <CustomLink href="/countries">Countries</CustomLink>
                     </ul>
                 </div>
                 <div className="items-center flex-shrink-0 hidden lg:flex">

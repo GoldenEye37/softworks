@@ -12,7 +12,6 @@ import Login from "./components/auth/LoginForm";
 import SignupForm from "./components/auth/SignupForm";
 import Dashboard from "./pages/Dashboard";
 import Products from "./pages/products/Products";
-import Countries from "./pages/currencies/Countries";
 
 const router = createBrowserRouter([
     {
@@ -35,10 +34,6 @@ const router = createBrowserRouter([
         {
             path: "products",
             element: <Products />,
-        },
-        {
-            path: "countries",
-            element: <Countries />,
         },
     ],
     },
