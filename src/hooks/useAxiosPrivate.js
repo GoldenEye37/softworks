@@ -1,5 +1,4 @@
-import {useContext, useEffect} from "react";
-import AuthContext from "../context/AuthProvider";
+import { useEffect} from "react";
 import useAuth from "./useAuth";
 import {axiosAuthenticated} from "../api/axios";
 

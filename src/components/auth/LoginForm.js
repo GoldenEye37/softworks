@@ -34,7 +34,6 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            // TODO skip auth for now
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ email, password }),
                 {

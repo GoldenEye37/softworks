@@ -442,9 +442,11 @@ const SignupForm = () => {
                         </div>
                         <div className="space-y-2 my-0 mx-4">
                             <div>
-                                <button type="submit"
-                                        className="w-full px-8 py-3 font-semibold rounded-md bg-amber-500 text-white">Sign
-                                    up
+                                <button
+                                    onSubmit={handleSubmit}
+                                    type="submit"
+                                    className="w-full px-8 py-3 font-semibold rounded-md bg-amber-500 text-white"
+                                >Sign up
                                 </button>
                             </div>
                             <p className="px-6 text-sm text-center text-gray-400">Don't have an account yet?
