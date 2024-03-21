@@ -1,3 +1,5 @@
+import logo from "../../assets/logo.png";
+
 export default function Navbar (){
     return (
         <header className="rounded-lg p-4 bg-gray-600 dark:text-gray-100">
@@ -5,9 +7,7 @@ export default function Navbar (){
                 <div className="flex">
                     <a rel="noopener noreferrer" href="#" aria-label="Back to homepage"
                        className="flex items-center p-2 mr-64">
-                        <div className="rounded-full bg-gray-800 w-12 h-12">
-
-                        </div>
+                        <img src={logo} className="rounded-full bg-gray-800 w-12 h-12"/>
                     </a>
                     <ul className="items-stretch hidden space-x-3 lg:flex">
                         <CustomLink href="/home">Home</CustomLink>
